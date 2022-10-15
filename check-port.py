@@ -11,7 +11,6 @@ logger.setLevel(lg.INFO)
 sock1 = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 sock2 = sk.socket(sk.AF_INET, sk.SOCK_STREAM)
 
-
 def check(x, sock=sock1):
     result = sock.connect_ex(('ts.qq.com', x))
     if result == 0:
@@ -47,8 +46,5 @@ def main():
 
     thread2 = Thread(target=two)
     thread2.start()
-
-    
-
 
 main()
