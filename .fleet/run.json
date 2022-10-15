@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "python",
+            "name": "check-port.py",
+            "arguments": [],
+        },
+
+    ]
+}
