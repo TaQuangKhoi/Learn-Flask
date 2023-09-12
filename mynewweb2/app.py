@@ -12,11 +12,7 @@ def hello_world():  # put application's code here
 @app.route('/mylove/')
 @app.route('/mylove/<name>')
 def who_is_my_love(name=None):
-    if name is None:
-        return 'My love is nobody'
-    if name == 'me':
-        return 'My love is myself'
-    return f'My love is {escape(name)}'
+    return render_template('Hảo Văn.html', name=name)
 
 
 def do_the_login():
