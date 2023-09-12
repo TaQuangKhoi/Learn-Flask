@@ -18,7 +18,7 @@ def my_love():
 def who_is_my_love(name):
     if name == 'me':
         return 'My love is myself'
-    return 'My love is ' + name
+    return f'My love is {escape(name)}'
 
 
 if __name__ == '__main__':
