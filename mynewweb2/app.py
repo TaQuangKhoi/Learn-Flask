@@ -15,8 +15,9 @@ def who_is_my_love(name=None):
     return render_template('Hảo Văn.html', name=name)
 
 
-def do_the_login():
-    return render_template('login.html')
+def do_the_login(req):
+
+    return 'Done'
 
 
 def show_the_login_form():
@@ -25,8 +26,9 @@ def show_the_login_form():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
-        return do_the_login()
+        return do_the_login(request)
     else:
         return show_the_login_form()
 
