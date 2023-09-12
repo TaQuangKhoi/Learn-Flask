@@ -16,11 +16,11 @@ def who_is_my_love(name=None):
 
 
 def do_the_login():
-    return 'Login'
+    return render_template('login.html')
 
 
 def show_the_login_form():
-    return 'Login form'
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
