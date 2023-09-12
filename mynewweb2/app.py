@@ -51,6 +51,7 @@ with app.test_request_context():
     print(url_for('my_love'))
     print(url_for('my_love', next='/'))
     print(url_for('who_is_my_love', name='Hảo Văn'))
+    print(url_for('static', filename='style.css'))
 
 if __name__ == '__main__':
     app.run()
