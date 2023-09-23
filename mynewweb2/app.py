@@ -1,7 +1,9 @@
 from flask import Flask, url_for, request, render_template
+from forms import SignupForm
+
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'haovan'
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -35,12 +37,16 @@ def login():
 
 @app.get('/signup')
 def signup_get():
-    return show_the_login_form()
+    form = SignupForm()
+    return render_template('signup.html', form=form)
 
 
 @app.post('/signup')
 def signup_post():
-    return do_the_login()
+    _name = request.form['name']
+    print(_name)
+    # return a Response object
+    return 'Thanks for registering'
 
 
 with app.test_request_context():
