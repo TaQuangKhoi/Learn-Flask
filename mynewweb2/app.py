@@ -1,18 +1,11 @@
 from flask import Flask, url_for, request, render_template
-from markupsafe import escape
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello_world():  # put application's code here
-    return 'Hello World!'
-
-
-@app.route('/mylove/')
-@app.route('/mylove/<name>')
-def who_is_my_love(name=None):
-    return render_template('Hảo Văn.html', name=name)
+    return render_template('index.html')
 
 
 def do_the_login(req):
@@ -51,7 +44,6 @@ def signup_post():
 
 
 with app.test_request_context():
-    print(url_for('who_is_my_love', name='Hảo Văn'))
     print(url_for('static', filename='style.css'))
 
 if __name__ == '__main__':
