@@ -13,12 +13,21 @@
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                                     <form class="mx-1 mx-md-4" action="" method="post">
-
+                                        {{ form.hidden_tag }}
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 {{ form.name.label(class="sr-only form-label") }}
                                                 {{ form.name(class="form-control", placeholder="Your Name") }}
+                                                {% if form.name.errors %}
+                                                    <div class="mt-1">
+                                                        {% for error in form.name.errors %}
+                                                            <div class="alert alert-danger">
+                                                                <span>{{ error }}</span>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
 
@@ -27,6 +36,15 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 {{ form.email.label(class="sr-only form-label") }}
                                                 {{ form.email(class="form-control", placeholder="Your Email") }}
+                                                {% if form.email.errors %}
+                                                    <div class="mt-1">
+                                                        {% for error in form.email.errors %}
+                                                            <div class="alert alert-danger">
+                                                                <span>{{ error }}</span>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
 
@@ -35,6 +53,15 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 {{ form.password.label(class="sr-only form-label") }}
                                                 {{ form.password(class="form-control", placeholder="Password") }}
+                                                {% if form.password.errors %}
+                                                    <div class="mt-1">
+                                                        {% for error in form.password.errors %}
+                                                            <div class="alert alert-danger">
+                                                                <span>{{ error }}</span>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
                                             </div>
                                         </div>
 
@@ -55,7 +82,8 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                                            {#                                            <button type="submit" class="btn btn-primary btn-lg">Register</button>#}
+                                            {{ form.submit(class="btn btn-primary btn-lg") }}
                                         </div>
 
                                     </form>

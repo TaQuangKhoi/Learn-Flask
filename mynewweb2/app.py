@@ -43,10 +43,15 @@ def signup_get():
 
 @app.post('/signup')
 def signup_post():
-    _name = request.form['name']
-    print(_name)
-    # return a Response object
-    return 'Thanks for registering'
+    form = SignupForm()
+    if form.validate_on_submit():
+        _name = form.name.data
+        _email = form.email.data
+        _password = form.password.data
+        print(_name, _email, _password)
+        return 'Success'
+
+    return render_template('signup.html', form=form)
 
 
 with app.test_request_context():
