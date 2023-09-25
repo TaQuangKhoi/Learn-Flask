@@ -12,6 +12,18 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            <div class="mt-1">
+                                                {% for message in messages %}
+                                                    <div class="alert alert-danger">
+                                                        <span>{{ message }}</span>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+
                                     <form class="mx-1 mx-md-4" action="" method="post">
                                         {{ form.hidden_tag() }}
                                         <div class="d-flex flex-row align-items-center mb-4">
@@ -36,6 +48,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 {{ form.email.label(class="sr-only form-label") }}
                                                 {{ form.email(class="form-control", placeholder="Your Email") }}
+
                                                 {% if form.email.errors %}
                                                     <div class="mt-1">
                                                         {% for error in form.email.errors %}

@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, render_template
+from flask import Flask, url_for, request, render_template, flash
 from forms import SignupForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -62,12 +62,16 @@ def signup_post():
         _password = form.password.data
         print(_name, _email, _password)
 
-        new_user = models.User(full_name=_name, email=_email)
-        new_user.set_password(_password)
-        db.session.add(new_user)
-        db.session.commit()
+        if db.session.query(models.User).filter_by(email=_email).count() == 0:
+            new_user = models.User(full_name=_name, email=_email)
+            new_user.set_password(_password)
+            db.session.add(new_user)
+            db.session.commit()
 
-        return render_template('sign-up-succeed.html', user=new_user)
+            return render_template('sign-up-succeed.html', user=new_user)
+        else:
+            flash(f'Email {_email} already exists')
+            return render_template('signup.html', form=form)
 
     print(form.errors)
 
