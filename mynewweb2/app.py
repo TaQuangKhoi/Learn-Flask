@@ -1,9 +1,19 @@
 from flask import Flask, url_for, request, render_template
 from forms import SignupForm
-
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+import os
+baseDir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'haovan'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(baseDir, 'data.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+Migrate(app, db)
+
+import models
 
 @app.route('/')
 def hello_world():  # put application's code here
