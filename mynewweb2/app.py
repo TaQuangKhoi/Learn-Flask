@@ -54,13 +54,24 @@ def signup_get():
 @app.post('/signup')
 def signup_post():
     form = SignupForm()
+    print(form.data)
     if form.validate_on_submit():
+        print('Form validated')
         _name = form.name.data
         _email = form.email.data
         _password = form.password.data
         print(_name, _email, _password)
-        return 'Success'
 
+        new_user = models.User(full_name=_name, email=_email)
+        new_user.set_password(_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        return render_template('sign-up-succeed.html', user=new_user)
+
+    print(form.errors)
+
+    print('Form not validated')
     return render_template('signup.html', form=form)
 
 
