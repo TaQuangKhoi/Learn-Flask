@@ -1,8 +1,9 @@
 from flask import Flask, url_for, request, render_template, flash
-from forms import SignupForm
+from forms import SignupForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
+
 baseDir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ db = SQLAlchemy(app)
 Migrate(app, db)
 
 import models
+
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -29,20 +31,31 @@ def do_the_login(req):
     return 'Done'
 
 
-def show_the_login_form():
-    return render_template('login.html')
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    form = LoginForm()
     error = None
-    if request.method == 'POST':
+    if form.validate_on_submit():
         # List of all data in request
-        print(request.values.keys())
+        _email = form.email.data
+        _password = form.password.data
+
+        # Check exist email
+        user = db.session.query(models.User).filter_by(email=_email).first()
+
+        if user is None:
+            flash(f'Email {_email} does not exist')
+        else:
+            # Check password
+            if user.check_password(_password):
+                return render_template('login-succeed.html', user=user)
+            else:
+                flash(f'Password is incorrect')
+
 
         return do_the_login(request)
     else:
-        return show_the_login_form()
+        return render_template('login.html', form=form)
 
 
 @app.get('/signup')
