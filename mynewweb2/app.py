@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, render_template, flash
+from flask import Flask, url_for, request, render_template, flash, session, redirect
 from forms import SignupForm, LoginForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -90,6 +90,18 @@ def signup_post():
 
     print('Form not validated')
     return render_template('signup.html', form=form)
+
+
+@app.route('/userhome', methods=['GET', 'POST'])
+def userHome():
+    _user_id = session.get('user')
+    print("_user_id: ", _user_id)
+
+    if _user_id:
+        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+        return render_template('userhome.html', user=user)
+    else:
+        return redirect('/')
 
 
 with app.test_request_context():
