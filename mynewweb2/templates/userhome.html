@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block items %}
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron">
+        <p>
+            Welcome to the Task Manager, {{ user.username }}!
+        </p>
+    </div>
+{% endblock %}

@@ -48,7 +48,7 @@ def login():
         else:
             # Check password
             if user.check_password(_password):
-                return render_template('login-succeed.html', user=user)
+                return render_template('userhome.html', user=user)
             else:
                 flash(f'Password is incorrect')
 
