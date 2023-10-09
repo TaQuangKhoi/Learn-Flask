@@ -48,10 +48,10 @@ def login():
         else:
             # Check password
             if user.check_password(_password):
+                session['user_id'] = user.user_id
                 return render_template('userhome.html', user=user)
             else:
                 flash(f'Password is incorrect')
-
 
         return do_the_login(request)
     else:
@@ -94,14 +94,16 @@ def signup_post():
 
 @app.route('/userhome', methods=['GET', 'POST'])
 def userHome():
-    _user_id = session.get('user')
+    print("session: ", session)
+    _user_id = session.get('user_id')
     print("_user_id: ", _user_id)
 
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
         return render_template('userhome.html', user=user)
     else:
-        return redirect('/')
+        return redirect('/login')
+        # return "Test"
 
 
 with app.test_request_context():
