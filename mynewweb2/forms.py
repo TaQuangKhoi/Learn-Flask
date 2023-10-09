@@ -23,3 +23,20 @@ class SignupForm(FlaskForm):
     ])
     confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Sign Up')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email', validators=[
+        Email(
+            message='Please enter a valid email'
+        ),
+        DataRequired(
+            message='Please enter your email'
+        ),
+    ])
+    password = PasswordField('Password', validators=[
+        DataRequired(
+            message='Please enter a password'
+        ),
+    ])
+    submit = SubmitField('Login')

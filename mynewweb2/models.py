@@ -12,7 +12,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(64), index=True, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.first_name} {self.last_name} {self.email} {self.password_hash}>'
+        return f'<User ({self.first_name}, {self.last_name}, {self.email}, {self.password_hash})>'
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
