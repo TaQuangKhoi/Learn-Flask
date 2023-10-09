@@ -20,7 +20,13 @@
 
                 {{ form.description.label(class="sr-only form-label") }}
                 {{ form.description(class="form-control", placeholder="Description") }}
-                {{ form.submit(class="btn btn-primary btn-lg") }}
+                <p class="lead"></p>
+                <p>
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                    <a class="btn btn-lg btn-warning btn-block" href="/userhome">
+                        Cancel
+                    </a>
+                </p>
             </form>
         </div>
     </div>
