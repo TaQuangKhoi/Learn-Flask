@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block items %}
+    <li class="nav-item">
+        <a class="nav-link" href="/newTask">New Task</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>New Task</h1>
+            <form action="" method="post">
+                {{ form.description.label(class="sr-only form-label") }}
+                {{ form.description(class="form-control", placeholder="Description") }}
+                {{ form.submit(class="btn btn-primary btn-lg") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

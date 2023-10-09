@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block items %}
-    <li class="nav-item">
-        <a class="nav-link" href="/logout">Log Out</a>
-    </li>
+    {% if is_logged_in %}
+        <li class="nav-item">
+            <a class="nav-link" href="/newTask">New Task</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+    {% else %}
+        {{ super() }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -34,7 +41,7 @@
             <p>
                 You have no tasks yet. Click the button below to create one.
             </p>
-            <a class="btn btn-primary" href="/tasks/create">Create Task</a>
+            <a class="btn btn-primary" href="/newTask">Create Task</a>
         </div>
     {% endif %}
 {% endblock %}

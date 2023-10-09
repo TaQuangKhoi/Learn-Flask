@@ -40,3 +40,13 @@ class LoginForm(FlaskForm):
         ),
     ])
     submit = SubmitField('Login')
+
+
+class TaskForm(FlaskForm):
+    description = StringField('Description', validators=[
+        DataRequired(
+            message='Please enter a description'
+        ),
+    ])
+    submit = SubmitField('Add Task')
+

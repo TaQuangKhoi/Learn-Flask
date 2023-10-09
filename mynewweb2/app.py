@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, render_template, flash, session, redirect
-from forms import SignupForm, LoginForm
+from forms import SignupForm, LoginForm, TaskForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -19,7 +19,7 @@ import models
 
 @app.route('/')
 def hello_world():  # put application's code here
-    return render_template('index.html')
+    return render_template('index.html', is_logged_in=is_logged_in())
 
 
 def do_the_login(req):
@@ -33,6 +33,9 @@ def do_the_login(req):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if is_logged_in():
+        return redirect('/userhome')
+
     form = LoginForm()
     error = None
     if form.validate_on_submit():
@@ -53,9 +56,15 @@ def login():
             else:
                 flash(f'Password is incorrect')
 
-        return do_the_login(request)
+        # return do_the_login(request)
     else:
         return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/')
 
 
 @app.get('/signup')
@@ -92,18 +101,36 @@ def signup_post():
     return render_template('signup.html', form=form)
 
 
+def is_logged_in():
+    return session.get('user_id') is not None
+
+
 @app.route('/userhome', methods=['GET', 'POST'])
 def userHome():
-    print("session: ", session)
     _user_id = session.get('user_id')
-    print("_user_id: ", _user_id)
 
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
         return render_template('userhome.html', user=user)
     else:
         return redirect('/login')
-        # return "Test"
+
+
+@app.route('/newTask', methods=['GET', 'POST'])
+def newTask():
+    form = TaskForm()
+    if is_logged_in():
+        user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
+
+        if form.validate_on_submit():
+            _description = form.description.data
+            task = models.Task(description=_description, user=user)
+            db.session.add(task)
+            db.session.commit()
+            return redirect('/userhome')
+        else:
+            return render_template('new-task.html', form=form, user=user)
+    redirect('/')
 
 
 with app.test_request_context():

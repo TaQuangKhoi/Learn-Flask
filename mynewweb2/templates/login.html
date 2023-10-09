@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <section class="vh-100 bg-body-tertiary">
+    <section class="bg-body-tertiary">
         <div class="container h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-lg-12 col-xl-11">
@@ -88,33 +88,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="signin">
-            <div class="content">
-                <h2>Sign In</h2>
-                <form class="form" method="post">
-                    <div class="inputBox">
-                        <input type="text" required
-                               value="{{ request.form.username if request.form.username }}"
-                        >
-                        <i>Username</i>
-                    </div>
-                    <div class="inputBox">
-                        <input type="password" required
-                               value="{{ request.form.password if request.form.password }}"
-                        >
-                        <i>Password</i>
-                    </div>
-                    <div class="links"><a href="#">Forgot Password</a> <a href="#">Signup</a>
-                    </div>
-                    <div class="inputBox">
-                        <input type="submit" value="Login">
-                    </div>
-                </form>
             </div>
         </div>
     </section>
