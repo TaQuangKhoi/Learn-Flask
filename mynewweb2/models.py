@@ -11,6 +11,8 @@ class User(db.Model):
     email = db.Column(db.String(64), index=True, nullable=False, unique=True)
     password_hash = db.Column(db.String(64), index=True, nullable=False)
 
+    tasks = db.relationship('Task', back_populates='user')
+
     def __repr__(self):
         return f'<User ({self.first_name}, {self.last_name}, {self.email}, {self.password_hash})>'
 
@@ -20,3 +22,15 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
+class Task(db.Model):
+    task_id = db.Column(db.Integer, Sequence('task_id_seq'), primary_key=True)
+    description = db.Column(db.String(128), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+
+    user = db.relationship('User', backref='tasks')
+
+    def __repr__(self):
+        return f'<Task ({self.description}, {self.user_id})>'
+
