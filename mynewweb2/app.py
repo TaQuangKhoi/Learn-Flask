@@ -107,11 +107,14 @@ def is_logged_in():
 
 @app.route('/userhome', methods=['GET', 'POST'])
 def userHome():
+    if not is_logged_in():
+        return redirect('/login')
+
     _user_id = session.get('user_id')
 
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        return render_template('userhome.html', user=user)
+        return render_template('userhome.html', user=user, is_logged_in=is_logged_in())
     else:
         return redirect('/login')
 
