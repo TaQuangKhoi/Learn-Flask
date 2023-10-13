@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 
@@ -19,7 +19,7 @@ class SignupForm(FlaskForm):
         DataRequired(
             message='Please enter a password'
         ),
-        # EqualTo('confirm_password', message='Passwords must match')
+        EqualTo('confirm_password', message='Passwords must match')
     ])
     confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Sign Up')
@@ -39,6 +39,7 @@ class LoginForm(FlaskForm):
             message='Please enter a password'
         ),
     ])
+    terms = BooleanField('I agree all statements in <a href="#!">Terms of service</a>')
     submit = SubmitField('Login')
 
 
