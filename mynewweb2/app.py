@@ -13,22 +13,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 Migrate(app, db)
-
 import models
 
 
 @app.route('/')
 def hello_world():  # put application's code here
     return render_template('index.html', is_logged_in=is_logged_in())
-
-
-def do_the_login(req):
-    # data from form
-    # username = req.form['username']
-    # print(username)
-    # password = req.form['password']
-    # print(password)
-    return 'Done'
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -106,7 +96,7 @@ def is_logged_in():
 
 
 @app.route('/userhome', methods=['GET', 'POST'])
-def userHome():
+def user_home():
     if not is_logged_in():
         return redirect('/login')
 
@@ -120,7 +110,7 @@ def userHome():
 
 
 @app.route('/newTask', methods=['GET', 'POST'])
-def newTask():
+def new_task():
     form = TaskForm()
     form.priority.choices = [
         (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
@@ -142,6 +132,21 @@ def newTask():
         else:
             return render_template('new-task.html', form=form, user=user)
     redirect('/')
+
+
+@app.route('/deleteTask', methods=['GET', 'POST'])
+def delete_task():
+    _user_id = session.get('user_id')
+    if _user_id:
+        _task_id = request.form['hiddenTaskId']
+        if _task_id:
+            task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+            db.session.delete(task)
+            db.session.commit()
+
+        return redirect('/userhome')
+
+    return redirect('/login')
 
 
 with app.test_request_context():

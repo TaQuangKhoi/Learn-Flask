@@ -31,13 +31,19 @@
                 {% for task in user.tasks %}
                     <tr class="{{ task.get_priority_class() }}">
                         <td>{{ task.description }}</td>
+                        <td class="text-center">
+                            <form action="/deleteTask" method="post">
+                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
     {% else %}
-        <div class="jumbotron">
+        <div class="container ">
             <p>
                 You have no tasks yet. Click the button below to create one.
             </p>
