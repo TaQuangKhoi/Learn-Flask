@@ -37,6 +37,16 @@ class Task(db.Model):
     def __repr__(self):
         return f'<Task ({self.description}, {self.user_id})>'
 
+    def get_priority_class(self):
+        if self.priority_id == 1:
+            return 'table-danger'
+        elif self.priority_id == 2:
+            return 'table-warning'
+        elif self.priority_id == 3:
+            return 'table-info'
+        else:
+            return 'table-primary'
+
 
 class Priority(db.Model):
     priority_id = db.Column(db.Integer, Sequence('priority_id_seq'), primary_key=True)
