@@ -33,6 +33,13 @@
                         <td>{{ task.description }}</td>
 
                         <td class="text-center">
+                            <form action="/doneTask" method="post">
+                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <button type="submit" class="btn btn-info">Done</button>
+                            </form>
+                        </td>
+
+                        <td class="text-center">
                             <form action="/editTask" method="post">
                                 <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
                                 <button type="submit" class="btn btn-danger">Edit</button>

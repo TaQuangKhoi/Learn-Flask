@@ -189,6 +189,22 @@ def edit_task():
     return redirect('/')
 
 
+@app.route('/doneTask', methods=['GET', 'POST'])
+def done_task():
+    _user_id = session.get('user_id')
+    if _user_id:
+        _task_id = request.form['hiddenTaskId']
+        if _task_id:
+            task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+            task.isCompleted = True
+            db.session.commit()
+
+        return redirect('/userhome')
+
+    return redirect('/')
+
+
+
 with app.test_request_context():
     print(url_for('static', filename='style.css'))
 

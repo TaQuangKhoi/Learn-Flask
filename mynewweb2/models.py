@@ -27,6 +27,7 @@ class User(db.Model):
 class Task(db.Model):
     task_id = db.Column(db.Integer, Sequence('task_id_seq'), primary_key=True)
     description = db.Column(db.String(128), nullable=False)
+    isCompleted = db.Column(db.Boolean, default=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     user = db.relationship('User', back_populates='tasks')
