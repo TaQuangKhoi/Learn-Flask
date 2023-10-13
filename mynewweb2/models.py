@@ -27,10 +27,24 @@ class User(db.Model):
 class Task(db.Model):
     task_id = db.Column(db.Integer, Sequence('task_id_seq'), primary_key=True)
     description = db.Column(db.String(128), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     user = db.relationship('User', back_populates='tasks')
+
+    priority_id = db.Column(db.Integer, db.ForeignKey('priority.priority_id'))
+    priority = db.relationship('Priority', back_populates='tasks')
 
     def __repr__(self):
         return f'<Task ({self.description}, {self.user_id})>'
+
+
+class Priority(db.Model):
+    priority_id = db.Column(db.Integer, Sequence('priority_id_seq'), primary_key=True)
+    text = db.Column(db.String(64), nullable=False)
+
+    tasks = db.relationship('Task', back_populates='priority')
+
+    def __repr__(self):
+        return f'<Priority {self.priority_id} with text {self.text}>'
+
 
