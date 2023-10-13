@@ -125,8 +125,13 @@ def new_task():
             _priority_id = form.priority.data
             _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
 
-            task = models.Task(description=_description, user=user, priority=_priority)
-            db.session.add(task)
+            _task_id = request.form['hiddenTaskId']
+            print(_task_id)
+
+            if _task_id == '0':
+                task = models.Task(description=_description, user=user, priority=_priority)
+                db.session.add(task)
+
             db.session.commit()
             return redirect('/userhome')
         else:
@@ -147,6 +152,41 @@ def delete_task():
         return redirect('/userhome')
 
     return redirect('/login')
+
+
+@app.route('/editTask', methods=['GET', 'POST'])
+def edit_task():
+    form = TaskForm()
+    form.priority.choices = [
+        (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
+    ]
+
+    _user_id = session.get('user_id')
+    if _user_id:
+        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+        _task_id = request.form['hiddenTaskId']
+        if _task_id:
+            if form.submitUpdate.data:
+                print('Update task', form.data)
+                _description = form.description.data
+                _priority_id = form.priority.data
+                _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
+
+                task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+                task.description = _description
+                task.priority = _priority
+                db.session.commit()
+                return redirect('/userhome')
+            else:
+                task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+                form.process()
+                form.description.data = task.description
+                form.priority.data = task.priority.priority_id
+                return render_template('new-task.html', form=form, user=user, task=task)
+        elif form.validate_on_submit():
+            print('Form validated')
+
+    return redirect('/')
 
 
 with app.test_request_context():

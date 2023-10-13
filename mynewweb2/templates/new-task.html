@@ -11,12 +11,24 @@
 
 {% block content %}
     <div class="container">
-        <div class="jumbotron">
-            <h1>New Task</h1>
+        <div class="container">
+
+            {% if task %}
+                <h1>Edit Task</h1>
+            {% else %}
+                <h1>New Task</h1>
+            {% endif %}
+
             <form action="" method="post">
                 {{ form.csrf_token }}
 
                 {{ form.hidden_tag() }}
+
+                {% if task %}
+                    <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}">
+                {% else %}
+                    <input type="hidden" name="hiddenTaskId" value="0">
+                {% endif %}
 
                 {{ form.description.label(class="sr-only form-label") }}
                 {{ form.description(class="form-control", placeholder="Description") }}
@@ -26,7 +38,11 @@
 
                 <p class="lead"></p>
                 <p>
-                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                    {% if task %}
+                        {{ form.submitUpdate(class="btn btn-primary btn-lg") }}
+                    {% else %}
+                        {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                    {% endif %}
                     <a class="btn btn-lg btn-warning btn-block" href="/userhome">
                         Cancel
                     </a>

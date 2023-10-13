@@ -51,5 +51,7 @@ class TaskForm(FlaskForm):
     ])
     priority = SelectField('Priority', coerce = int)
 
-    submit = SubmitField('Add Task')
+    submitAdd = SubmitField('Add Task')
+    submitUpdate = SubmitField('Update Task')
+
 

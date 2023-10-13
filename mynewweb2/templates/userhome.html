@@ -31,6 +31,14 @@
                 {% for task in user.tasks %}
                     <tr class="{{ task.get_priority_class() }}">
                         <td>{{ task.description }}</td>
+
+                        <td class="text-center">
+                            <form action="/editTask" method="post">
+                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <button type="submit" class="btn btn-danger">Edit</button>
+                            </form>
+                        </td>
+
                         <td class="text-center">
                             <form action="/deleteTask" method="post">
                                 <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
