@@ -14,13 +14,13 @@
 {% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
+    <div class="m-5 p-5 mb-4 bg-body-secondary rounded-3">
         <p>
             Welcome to the Task Manager, {{ user.full_name }}!
         </p>
     </div>
     {% if user.tasks %}
-        <div class="jumptron">
+        <div class="container">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
