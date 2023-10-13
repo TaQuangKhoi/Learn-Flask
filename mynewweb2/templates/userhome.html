@@ -29,9 +29,17 @@
                 </thead>
                 <tbody>
                 {% for task in user.tasks %}
-                    <tr>
-                        <td>{{ task.description }}</td>
-                    </tr>
+                    {% if task.priority_id == 1 %}
+                        <tr class="table-danger">
+                            {% elif task.priority_id == 2 %}
+                        <tr class="table-warning">
+                            {% elif task.priority_id == 3 %}
+                        <tr class="table-info">
+                            {% else %}
+                        <tr class="table-primary">
+                    {% endif %}
+                <td>{{ task.description }}</td>
+                </tr>
                 {% endfor %}
                 </tbody>
             </table>

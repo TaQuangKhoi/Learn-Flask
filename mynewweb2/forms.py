@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 
@@ -49,5 +49,7 @@ class TaskForm(FlaskForm):
             message='Please enter a description'
         ),
     ])
+    priority = SelectField('Priority', coerce = int)
+
     submit = SubmitField('Add Task')
 

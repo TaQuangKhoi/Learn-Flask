@@ -122,12 +122,20 @@ def userHome():
 @app.route('/newTask', methods=['GET', 'POST'])
 def newTask():
     form = TaskForm()
+    form.priority.choices = [
+        (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
+    ]
+
     if is_logged_in():
         user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
 
         if form.validate_on_submit():
             _description = form.description.data
-            task = models.Task(description=_description, user=user)
+
+            _priority_id = form.priority.data
+            _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
+
+            task = models.Task(description=_description, user=user, priority=_priority)
             db.session.add(task)
             db.session.commit()
             return redirect('/userhome')
