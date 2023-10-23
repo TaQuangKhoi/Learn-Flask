@@ -135,7 +135,14 @@ def project_detail(projectId):
 
     form = SearchTaskForm()
 
-    return render_template('project_detail.html', user=user, project=project, form=form, tasks=project.tasks)
+    return render_template(
+        'project_detail.html',
+        user=user,
+        project=project,
+        form=form,
+        tasks=project.tasks,
+        is_logged_in=is_logged_in(),
+    )
 
 
 @app.route('/search_project', methods=['GET', 'POST'])

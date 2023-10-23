@@ -15,7 +15,12 @@ def user_home():
 
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        return render_template('userhome.html', user=user, is_logged_in=is_logged_in())
+        projects = db.session.query(models.Project).filter_by(user_id=_user_id).all()
+        # take all tasks of in projects
+        tasks = []
+        for project in projects:
+            tasks.extend(db.session.query(models.Task).filter_by(project_id=project.project_id).all())
+        return render_template('userhome.html', user=user, tasks=tasks, is_logged_in=is_logged_in())
     else:
         return redirect('/login')
 
