@@ -120,3 +120,15 @@ def edit_project():
             print('Form validated')
 
     return redirect('/')
+
+
+@app.route('/project_detail/<projectId>', methods=['GET'])
+def project_detail(projectId):
+    _user_id = session.get('user_id')
+    if not _user_id:
+        return redirect('/login')
+
+    user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+    project = db.session.query(models.Project).filter_by(project_id=projectId).first()
+
+    return render_template('project_detail.html', user=user, project=project)

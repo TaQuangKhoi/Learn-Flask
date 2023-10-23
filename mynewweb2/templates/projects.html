@@ -36,7 +36,11 @@
                 <tbody>
                 {% for project in user.projects %}
                     <tr class="">
-                        <td>{{ project.name }}</td>
+                        <td>
+                            <a href="/project_detail/{{ + project.project_id }}">
+                                {{ project.name }}
+                            </a>
+                        </td>
 
                         <td>{{ project.desc }}</td>
 
