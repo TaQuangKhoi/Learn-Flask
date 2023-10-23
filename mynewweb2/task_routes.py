@@ -49,6 +49,51 @@ def new_task():
     redirect('/')
 
 
+@app.route('/new_task/<projectId>', methods=['GET', 'POST'])
+def new_task_by_project(projectId):
+    form = TaskForm()
+
+    form.priority.choices = [
+        (p.priority_id, p.desc) for p in db.session.query(models.Priority).all()
+    ]
+
+    form.status.choices = [
+        (s.status_id, s.desc) for s in db.session.query(models.Status).all()
+    ]
+
+    if is_logged_in():
+        user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
+
+        project = db.session.query(models.Project).filter_by(project_id=projectId).first()
+
+        if form.validate_on_submit():
+            _description = form.description.data
+
+            _priority_id = form.priority.data
+            _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
+
+            _status_id = form.status.data
+            _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
+
+            _task_id = request.form['hiddenTaskId']
+
+            _deadline = form.deadline.data
+
+
+            if _task_id == '0':
+                task = models.Task(
+                    description=_description, project=project, priority=_priority, status=_status,
+                    deadline=_deadline
+                )
+                db.session.add(task)
+
+            db.session.commit()
+            return redirect('/project_detail/' + projectId)
+        else:
+            return render_template('new-task.html', form=form, user=user, project=project)
+    redirect('/')
+
+
 @app.route('/deleteTask', methods=['GET', 'POST'])
 def delete_task():
     _user_id = session.get('user_id')

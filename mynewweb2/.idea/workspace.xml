@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Tách code task route ra file riêng">
-      <change afterPath="$PROJECT_DIR$/task_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/project_detail.html" afterDir="false" />
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Make Project Detail UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/task_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/new-task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new-task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698042611865</updated>
-      <workItem from="1698042614887" duration="5667000" />
+      <workItem from="1698042614887" duration="6739000" />
     </task>
     <task id="LOCAL-00001" summary="Done create account and login with new DB">
       <option name="closed" value="true" />
@@ -159,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698047101016</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Make Project Detail UI">
+      <option name="closed" value="true" />
+      <created>1698048530238</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698048530238</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,6 +192,7 @@
     <MESSAGE value="Done delete project" />
     <MESSAGE value="Done update project" />
     <MESSAGE value="Tách code task route ra file riêng" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tách code task route ra file riêng" />
+    <MESSAGE value="Make Project Detail UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make Project Detail UI" />
   </component>
 </project>

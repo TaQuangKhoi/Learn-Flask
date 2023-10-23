@@ -19,7 +19,13 @@
             {% if task %}
                 <h1>Edit Task</h1>
             {% else %}
-                <h1>New Task</h1>
+                {% if project %}
+                    <h1>
+                        New Task for Project - {{ project.name }}
+                    </h1>
+                {% else %}
+                    <h1>New Task</h1>
+                {% endif %}
             {% endif %}
 
             <form action="" method="post">
@@ -39,12 +45,22 @@
                 {{ form.priority.label(class="sr-only form-label") }}
                 {{ form.priority(class="form-control", placeholder="Description") }}
 
+                {{ form.status.label(class="sr-only form-label") }}
+                {{ form.status(class="form-control", placeholder="Status") }}
+
+                {{ form.deadline.label(class="sr-only form-label") }}
+                {{ form.deadline(class="form-control", placeholder="Deadline") }}
+
                 <p class="lead"></p>
                 <p>
                     {% if task %}
                         {{ form.submitUpdate(class="btn btn-primary btn-lg") }}
                     {% else %}
-                        {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                        {% if project %}
+                            {{ form.submitAddByProject(class="btn btn-primary btn-lg") }}
+                        {% else %}
+                            {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                        {% endif %}
                     {% endif %}
                     <a class="btn btn-lg btn-warning btn-block" href="/userhome">
                         Cancel

@@ -57,9 +57,16 @@ class TaskForm(FlaskForm):
             message='Please enter a description'
         ),
     ])
-    priority = SelectField('Priority', coerce = int)
+    priority = SelectField('Priority', coerce=int)
+    status = SelectField('Status', coerce=int)
+    deadline = DateField('Deadline', validators=[
+        DataRequired(
+            message='Please choose a deadline'
+        ),
+    ])
 
     submitAdd = SubmitField('Add Task')
+    submitAddByProject = SubmitField('Add Task to Project')
     submitUpdate = SubmitField('Update Task')
 
 
@@ -80,7 +87,7 @@ class ProjectForm(FlaskForm):
         ),
     ])
 
-    status = SelectField('Status', coerce = int)
+    status = SelectField('Status', coerce=int)
 
     submitAdd = SubmitField('Add Project')
     submitUpdate = SubmitField('Update Project')

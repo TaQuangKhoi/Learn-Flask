@@ -19,7 +19,7 @@
 {% block content %}
     <div class="container">
         <h1>Project: <span class="fw-bold">{{ project.name }}</span></h1>
-        <a class="btn btn-primary my-2" href="/newTask">Create Task</a>
+        <a class="btn btn-primary my-2" href="/new_task/{{ project.project_id }}">Create Task</a>
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -31,6 +31,8 @@
             {% for task in project.tasks %}
                 <tr class="{{ task.get_priority_class() }}">
                     <td>{{ task.description }}</td>
+
+                    <td>{{ task.status.desc }}</td>
 
                     <td class="text-center">
                         <form action="/doneTask" method="post">
