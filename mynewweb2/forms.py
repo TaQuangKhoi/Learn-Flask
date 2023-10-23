@@ -102,3 +102,8 @@ class ProjectForm(FlaskForm):
 
     submitAdd = SubmitField('Add Project')
     submitUpdate = SubmitField('Update Project')
+
+
+class SearchProjectForm(FlaskForm):
+    keyword = StringField('Keywords')
+    submit = SubmitField('Search')

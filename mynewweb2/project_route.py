@@ -14,7 +14,9 @@ def projects_list():
 
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        return render_template('projects.html', user=user, is_logged_in=is_logged_in())
+        form = SearchProjectForm()
+        return render_template('projects.html', user=user, projects=user.projects, form=form,
+                               is_logged_in=is_logged_in())
     else:
         return redirect('/login')
 
@@ -132,3 +134,28 @@ def project_detail(projectId):
     project = db.session.query(models.Project).filter_by(project_id=projectId).first()
 
     return render_template('project_detail.html', user=user, project=project)
+
+
+@app.route('/search_project', methods=['GET', 'POST'])
+def search_project():
+    _user_id = session.get('user_id')
+    if not _user_id:
+        return redirect('/login')
+
+    form = SearchProjectForm()
+    user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+    keyword = form.keyword.data
+
+    form.keyword.data = keyword
+
+    projects = db.session.query(models.Project).filter(models.Project.name.like('%' + keyword + '%')).all()
+    for project in projects:
+        print(project)
+    print(keyword)
+    return render_template(
+        'projects.html',
+        user=user,
+        projects=projects,
+        form=form,
+        is_logged_in=is_logged_in()
+    )

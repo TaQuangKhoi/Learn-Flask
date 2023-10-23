@@ -90,4 +90,4 @@ class Project(db.Model):
     tasks = db.relationship('Task', back_populates='project')
 
     def __repr__(self):
-        return f'<Project {self.project_id} with name {self.name}>'
+        return f'<Project has id {self.project_id} with name {self.name}>'
