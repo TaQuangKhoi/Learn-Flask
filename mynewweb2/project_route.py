@@ -133,7 +133,9 @@ def project_detail(projectId):
     user = db.session.query(models.User).filter_by(user_id=_user_id).first()
     project = db.session.query(models.Project).filter_by(project_id=projectId).first()
 
-    return render_template('project_detail.html', user=user, project=project)
+    form = SearchTaskForm()
+
+    return render_template('project_detail.html', user=user, project=project, form=form, tasks=project.tasks)
 
 
 @app.route('/search_project', methods=['GET', 'POST'])
@@ -157,5 +159,32 @@ def search_project():
         user=user,
         projects=projects,
         form=form,
+        is_logged_in=is_logged_in()
+    )
+
+
+@app.route('/search_tasks', methods=['GET', 'POST'])
+def search_tasks():
+    _user_id = session.get('user_id')
+    if not _user_id:
+        return redirect('/login')
+
+    project_id = request.form['hiddenProjectIdForSearch']
+    project = db.session.query(models.Project).filter_by(project_id=project_id).first()
+
+    form = SearchProjectForm()
+    user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+    keyword = form.keyword.data
+
+    form.keyword.data = keyword
+    # filter in project with id is project_id
+    tasks = db.session.query(models.Task).filter(models.Task.project_id == project_id).filter(
+        models.Task.description.like('%' + keyword + '%')).all()
+    return render_template(
+        'project_detail.html',
+        user=user,
+        tasks=tasks,
+        form=form,
+        project=project,
         is_logged_in=is_logged_in()
     )

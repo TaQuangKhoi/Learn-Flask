@@ -22,6 +22,12 @@
         <p>Project Deadline: {{ project.deadline.strftime("%d/%m/%Y") }}</p>
         <p>Status: {{ project.status.desc }}</p>
         <a class="btn btn-primary my-2" href="/new_task/{{ project.project_id }}">Create Task</a>
+        <form action="/search_tasks" method="post" class="my-3">
+            <label for="search_tasks">Search Tasks</label>
+            <input type="hidden" name="hiddenProjectIdForSearch" value="{{ project.project_id }}">
+            {{ form.keyword(class="form-control", placeholder="Status") }}
+            {{ form.submit(class="btn btn-primary") }}
+        </form>
         <table class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
@@ -32,7 +38,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for task in project.tasks %}
+            {% for task in tasks %}
                 <tr class="{{ task.get_priority_class() }}">
                     <td>{{ task.description }}</td>
 

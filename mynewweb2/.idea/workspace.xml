@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Done logic update status for project">
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Doen filter project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698054124668</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Doen filter project">
+      <option name="closed" value="true" />
+      <created>1698055619292</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698055619292</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +236,7 @@
     <MESSAGE value="Done update task by project" />
     <MESSAGE value="Update status of project by task" />
     <MESSAGE value="Done logic update status for project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done logic update status for project" />
+    <MESSAGE value="Doen filter project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Doen filter project" />
   </component>
 </project>

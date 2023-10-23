@@ -107,3 +107,8 @@ class ProjectForm(FlaskForm):
 class SearchProjectForm(FlaskForm):
     keyword = StringField('Keywords')
     submit = SubmitField('Search')
+
+
+class SearchTaskForm(FlaskForm):
+    keyword = StringField('Keywords')
+    submit = SubmitField('Search')
