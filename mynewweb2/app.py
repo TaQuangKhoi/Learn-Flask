@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, render_template, flash, session, redirect
-from forms import SignupForm, LoginForm, TaskForm
+from forms import SignupForm, LoginForm, TaskForm, ProjectForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -14,7 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 Migrate(app, db)
 import models
-
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -208,6 +207,7 @@ def done_task():
 
     return redirect('/')
 
+
 @app.route('/projects', methods=['GET', 'POST'])
 def projects_list():
     if not is_logged_in():
@@ -220,6 +220,9 @@ def projects_list():
         return render_template('userhome.html', user=user, is_logged_in=is_logged_in())
     else:
         return redirect('/login')
+
+
+import project_route
 
 
 with app.test_request_context():

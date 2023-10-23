@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo
 
 
@@ -63,3 +63,24 @@ class TaskForm(FlaskForm):
     submitUpdate = SubmitField('Update Task')
 
 
+class ProjectForm(FlaskForm):
+    name = StringField('Name', validators=[
+        DataRequired(
+            message='Please enter a name'
+        ),
+    ])
+    desc = StringField('Description', validators=[
+        DataRequired(
+            message='Please enter a description'
+        ),
+    ])
+    deadline = DateField('Deadline', validators=[
+        DataRequired(
+            message='Please choose a deadline'
+        ),
+    ])
+    priority = SelectField('Priority', coerce = int)
+    status = SelectField('Status', coerce = int)
+
+    submitAdd = SubmitField('Add Project')
+    submitUpdate = SubmitField('Update Project')

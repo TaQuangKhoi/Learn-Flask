@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Done create account and login with new DB" />
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Create UI Projects">
+      <change afterPath="$PROJECT_DIR$/project_route.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/new-project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/new-task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new-task.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/userhome.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/userhome.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +21,14 @@
   </component>
   <component name="CodyActiveAccount">
     <option name="activeAccountId" value="56335776-a5ef-4aa0-bb48-8a333a3da3dd" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -31,6 +48,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -38,6 +56,7 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "thi-giua-ky",
+    "last_opened_file_path": "D:/repos/TaQuangKhoi/Learn-Everything/Learn-Flask/mynewweb2/templates",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -54,6 +73,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\repos\TaQuangKhoi\Learn-Everything\Learn-Flask\mynewweb2\templates" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="mynewweb2" type="PythonConfigurationType" factoryName="Python">
       <module name="mynewweb2" />
@@ -86,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698042611865</updated>
-      <workItem from="1698042614887" duration="918000" />
+      <workItem from="1698042614887" duration="2034000" />
     </task>
     <task id="LOCAL-00001" summary="Done create account and login with new DB">
       <option name="closed" value="true" />
@@ -96,7 +120,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698043473267</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Create UI Projects">
+      <option name="closed" value="true" />
+      <created>1698043826694</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698043826694</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +147,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Done create account and login with new DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done create account and login with new DB" />
+    <MESSAGE value="Create UI Projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create UI Projects" />
   </component>
 </project>

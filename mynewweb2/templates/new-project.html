@@ -17,9 +17,9 @@
         <div class="container">
 
             {% if task %}
-                <h1>Edit Task</h1>
+                <h1>Edit Project</h1>
             {% else %}
-                <h1>New Task</h1>
+                <h1>New Project</h1>
             {% endif %}
 
             <form action="" method="post">
@@ -28,16 +28,22 @@
                 {{ form.hidden_tag() }}
 
                 {% if task %}
-                    <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}">
+                    <input type="hidden" name="hiddenProjectId" value="{{ task.task_id }}">
                 {% else %}
-                    <input type="hidden" name="hiddenTaskId" value="0">
+                    <input type="hidden" name="hiddenProjectId" value="0">
                 {% endif %}
 
-                {{ form.description.label(class="sr-only form-label") }}
-                {{ form.description(class="form-control", placeholder="Description") }}
+                {{ form.desc.label(class="sr-only form-label") }}
+                {{ form.desc(class="form-control", placeholder="Description") }}
+
+                {{ form.deadline.label(class="sr-only form-label") }}
+                {{ form.deadline(class="form-control", placeholder="Deadline") }}
 
                 {{ form.priority.label(class="sr-only form-label") }}
                 {{ form.priority(class="form-control", placeholder="Description") }}
+
+                {{ form.status.label(class="sr-only form-label") }}
+                {{ form.status(class="form-control", placeholder="Status") }}
 
                 <p class="lead"></p>
                 <p>
