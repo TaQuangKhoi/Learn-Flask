@@ -59,7 +59,7 @@ class TaskForm(FlaskForm):
     ])
     priority = SelectField('Priority', coerce=int)
     status = SelectField('Status', coerce=int)
-    deadline = DateTimeField('Deadline', validators=[
+    deadline = DateField('Deadline', validators=[
         DataRequired(
             message='Please choose a deadline'
         ),
@@ -81,7 +81,7 @@ class ProjectForm(FlaskForm):
             message='Please enter a description'
         ),
     ])
-    deadline = DateTimeField('Deadline', validators=[
+    deadline = DateField('Deadline', validators=[
         DataRequired(
             message='Please choose a deadline'
         ),
