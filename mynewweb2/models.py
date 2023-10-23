@@ -50,7 +50,7 @@ class Task(db.Model):
     deadline = db.Column(db.Date, nullable=False)
 
     def __repr__(self):
-        return f'<Task ({self.description}, {self.user_id})>'
+        return f'<Task ({self.description})>'
 
     def get_priority_class(self):
         if self.priority_id == 1:

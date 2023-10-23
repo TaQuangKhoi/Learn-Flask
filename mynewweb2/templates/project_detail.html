@@ -26,6 +26,8 @@
             <tr>
                 <th>Description</th>
                 <th>Status</th>
+                <th class="text-center">Deadline</th>
+                <th colspan="3" class="text-center">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +36,8 @@
                     <td>{{ task.description }}</td>
 
                     <td>{{ task.status.desc }}</td>
+
+                    <td class="text-center">{{ task.deadline.strftime("%d/%m/%Y") }}</td>
 
                     <td class="text-center">
                         <form action="/doneTask" method="post">
@@ -50,7 +54,7 @@
                     </td>
 
                     <td class="text-center">
-                        <form action="/deleteTask" method="post">
+                        <form action="/delete_task/{{ project.project_id }}" method="post">
                             <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>

@@ -51,6 +51,15 @@
 
                 {{ form.deadline.label(class="sr-only form-label") }}
                 {{ form.deadline(class="form-control", placeholder="Deadline") }}
+                {% if form.deadline.errors %}
+                    <div class="mt-1">
+                        {% for error in form.deadline.errors %}
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
                 <p class="lead"></p>
                 <p>

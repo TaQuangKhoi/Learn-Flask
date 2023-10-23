@@ -1,9 +1,9 @@
 import models
 from app import db, is_logged_in
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, flash
 from app import app
 from forms import *
-
+from datetime import datetime, timedelta
 
 @app.route('/userhome', methods=['GET', 'POST'])
 def user_home():
@@ -66,6 +66,15 @@ def new_task_by_project(projectId):
 
         project = db.session.query(models.Project).filter_by(project_id=projectId).first()
 
+        if form.deadline.data:
+            print('form Deadline', form.deadline.data, type(form.deadline.data))
+            print('project Deadline', project.deadline, type(project.deadline))
+            if form.deadline.data > project.deadline:
+                print('Deadline is invalid')
+                # flash(f'Deadline must be before {project.deadline}')
+            else:
+                print('Deadline is valid')
+
         if form.validate_on_submit():
             _description = form.description.data
 
@@ -78,7 +87,6 @@ def new_task_by_project(projectId):
             _task_id = request.form['hiddenTaskId']
 
             _deadline = form.deadline.data
-
 
             if _task_id == '0':
                 task = models.Task(
@@ -101,10 +109,26 @@ def delete_task():
         _task_id = request.form['hiddenTaskId']
         if _task_id:
             task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+            print("task: ", task)
             db.session.delete(task)
             db.session.commit()
 
         return redirect('/userhome')
+
+    return redirect('/login')
+
+
+@app.route('/delete_task/<projectId>', methods=['GET', 'POST'])
+def delete_task_redirect_to_project(projectId):
+    _user_id = session.get('user_id')
+    if _user_id:
+        _task_id = request.form['hiddenTaskId']
+        if _task_id:
+            task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
+            db.session.delete(task)
+            db.session.commit()
+
+        return redirect('/project_detail/' + projectId)
 
     return redirect('/login')
 

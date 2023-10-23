@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, DateField, DateTimeField
 from wtforms.validators import DataRequired, Email, EqualTo
 
+date_format = '%d-%m-%Y'
 
 class SignupForm(FlaskForm):
     name = StringField('Name')
@@ -59,11 +60,15 @@ class TaskForm(FlaskForm):
     ])
     priority = SelectField('Priority', coerce=int)
     status = SelectField('Status', coerce=int)
-    deadline = DateField('Deadline', validators=[
-        DataRequired(
-            message='Please choose a deadline'
-        ),
-    ])
+    deadline = DateField(
+        'Deadline',
+        validators=[
+            DataRequired(
+                message='Please choose a deadline'
+            ),
+        ],
+        # format=date_format,
+    )
 
     submitAdd = SubmitField('Add Task')
     submitAddByProject = SubmitField('Add Task to Project')
@@ -76,16 +81,22 @@ class ProjectForm(FlaskForm):
             message='Please enter a name'
         ),
     ])
+
     desc = StringField('Description', validators=[
         DataRequired(
             message='Please enter a description'
         ),
     ])
-    deadline = DateField('Deadline', validators=[
-        DataRequired(
-            message='Please choose a deadline'
-        ),
-    ])
+
+    deadline = DateField(
+        'Deadline',
+        validators=[
+            DataRequired(
+                message='Please choose a deadline'
+            ),
+        ],
+        # format=date_format,
+    )
 
     status = SelectField('Status', coerce=int)
 
