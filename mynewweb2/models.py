@@ -47,7 +47,7 @@ class Task(db.Model):
     status_id = db.Column(db.Integer, db.ForeignKey('status.status_id'))
     status = db.relationship('Status', back_populates='tasks')
 
-    deadline = db.Column(db.DateTime, nullable=False)
+    deadline = db.Column(db.Date, nullable=False)
 
     def __repr__(self):
         return f'<Task ({self.description}, {self.user_id})>'
@@ -79,7 +79,7 @@ class Project(db.Model):
 
     name = db.Column(db.String(64), nullable=False)
     desc = db.Column(db.String(128), nullable=False)
-    deadline = db.Column(db.DateTime, nullable=False)
+    deadline = db.Column(db.Date, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     user = db.relationship('User', back_populates='projects')

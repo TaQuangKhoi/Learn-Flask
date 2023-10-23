@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Make Project Detail UI">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/task_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
