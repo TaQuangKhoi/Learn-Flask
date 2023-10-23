@@ -16,7 +16,7 @@
 {% block content %}
     <div class="m-5 p-5 mb-4 bg-body-secondary rounded-3">
         <p>
-            Welcome to the Task Manager, {{ user.first_name +   " " +   user.last_name }}!
+            Welcome to the Projects Manager, {{ user.first_name + " " +  user.last_name }}!
         </p>
     </div>
     {% if user.tasks %}
@@ -28,27 +28,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for task in user.tasks %}
-                    <tr class="{{ task.get_priority_class() }}">
-                        <td>{{ task.description }}</td>
+                {% for project in user.projects %}
+                    <tr class="{{ project.get_priority_class() }}">
+                        <td>{{ project.description }}</td>
 
                         <td class="text-center">
                             <form action="/doneTask" method="post">
-                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <input type="hidden" name="hiddenTaskId" value="{{ project.task_id }}"/>
                                 <button type="submit" class="btn btn-info">Done</button>
                             </form>
                         </td>
 
                         <td class="text-center">
                             <form action="/editTask" method="post">
-                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <input type="hidden" name="hiddenTaskId" value="{{ project.task_id }}"/>
                                 <button type="submit" class="btn btn-danger">Edit</button>
                             </form>
                         </td>
 
                         <td class="text-center">
                             <form action="/deleteTask" method="post">
-                                <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
+                                <input type="hidden" name="hiddenTaskId" value="{{ project.task_id }}"/>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
@@ -60,9 +60,9 @@
     {% else %}
         <div class="container ">
             <p>
-                You have no tasks yet. Click the button below to create one.
+                You have no project yet. Click the button below to create one.
             </p>
-            <a class="btn btn-primary" href="/newTask">Create Task</a>
+            <a class="btn btn-primary" href="/newTask">Create Project</a>
         </div>
     {% endif %}
 {% endblock %}
