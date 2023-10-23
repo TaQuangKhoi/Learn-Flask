@@ -21,6 +21,8 @@ class SignupForm(FlaskForm):
         ),
         EqualTo('confirm_password', message='Passwords must match')
     ])
+    terms = BooleanField('I agree all statements in <a href="#!">Terms of service</a>')
+
     confirm_password = PasswordField('Confirm Password')
     submit = SubmitField('Sign Up')
 
@@ -39,7 +41,6 @@ class LoginForm(FlaskForm):
             message='Please enter a password'
         ),
     ])
-    terms = BooleanField('I agree all statements in <a href="#!">Terms of service</a>')
     submit = SubmitField('Login')
 
 
