@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Create project and show projects list">
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Done delete project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/new-project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new-project.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698042611865</updated>
-      <workItem from="1698042614887" duration="3716000" />
+      <workItem from="1698042614887" duration="4355000" />
     </task>
     <task id="LOCAL-00001" summary="Done create account and login with new DB">
       <option name="closed" value="true" />
@@ -139,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698045734995</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Done delete project">
+      <option name="closed" value="true" />
+      <created>1698046527405</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698046527405</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +168,7 @@
     <MESSAGE value="Create UI Projects" />
     <MESSAGE value="Tách project_route.py riêng" />
     <MESSAGE value="Create project and show projects list" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create project and show projects list" />
+    <MESSAGE value="Done delete project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done delete project" />
   </component>
 </project>

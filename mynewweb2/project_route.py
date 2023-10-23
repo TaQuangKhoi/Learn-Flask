@@ -2,7 +2,7 @@ import models
 from app import db, is_logged_in
 from flask import render_template, request, redirect, session
 from app import app
-from forms import ProjectForm
+from forms import *
 
 
 @app.route('/projects', methods=['GET', 'POST'])
@@ -84,6 +84,7 @@ def edit_project():
     if _user_id:
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
         _project_id = request.form['hiddenProjectId']
+        print("_project_id: " + _project_id)
         if _project_id:
             if form.submitUpdate.data:
                 print('Update project', form.data)
@@ -96,18 +97,22 @@ def edit_project():
                 _status_id = form.status.data
                 _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
 
-                project = db.session.query(models.Task).filter_by(project_id=_project_id).first()
+                project = db.session.query(models.Project).filter_by(project_id=_project_id).first()
+
+                project.name = _name
                 project.desc = _description
+                project.deadline = _deadline
                 project.status = _status
+
                 db.session.commit()
                 return redirect('/projects')
             else:
-                project = db.session.query(models.Task).filter_by(project_id=_project_id).first()
+                project = db.session.query(models.Project).filter_by(project_id=_project_id).first()
                 form.process()
 
                 form.name.data = project.name
                 form.desc.data = project.desc
-                form.deadline = project.deadline
+                form.deadline.data = project.deadline
                 form.status.data = project.status.status_id
 
                 return render_template('new-project.html', form=form, user=user, project=project)
