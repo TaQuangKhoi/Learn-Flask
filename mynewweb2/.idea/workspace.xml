@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Make Project Detail UI">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Save code">
       <change beforePath="$PROJECT_DIR$/task_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/new-task.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new-task.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/project_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -168,7 +163,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698048530238</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Save code">
+      <option name="closed" value="true" />
+      <created>1698053009482</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698053009482</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +197,7 @@
     <MESSAGE value="Done update project" />
     <MESSAGE value="Tách code task route ra file riêng" />
     <MESSAGE value="Make Project Detail UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make Project Detail UI" />
+    <MESSAGE value="Save code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Save code" />
   </component>
 </project>

@@ -47,7 +47,7 @@
                     </td>
 
                     <td class="text-center">
-                        <form action="/editTask" method="post">
+                        <form action="/edit_task/{{ project.project_id }}" method="post">
                             <input type="hidden" name="hiddenTaskId" value="{{ task.task_id }}"/>
                             <button type="submit" class="btn btn-danger">Edit</button>
                         </form>
