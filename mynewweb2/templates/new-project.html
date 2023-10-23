@@ -16,7 +16,7 @@
     <div class="container">
         <div class="container">
 
-            {% if task %}
+            {% if project %}
                 <h1>Edit Project</h1>
             {% else %}
                 <h1>New Project</h1>
@@ -27,8 +27,8 @@
 
                 {{ form.hidden_tag() }}
 
-                {% if task %}
-                    <input type="hidden" name="hiddenProjectId" value="{{ task.task_id }}">
+                {% if project %}
+                    <input type="hidden" name="hiddenProjectId" value="{{ project.project_id }}">
                 {% else %}
                     <input type="hidden" name="hiddenProjectId" value="0">
                 {% endif %}
@@ -47,12 +47,12 @@
 
                 <p class="lead"></p>
                 <p>
-                    {% if task %}
+                    {% if project %}
                         {{ form.submitUpdate(class="btn btn-primary btn-lg") }}
                     {% else %}
                         {{ form.submitAdd(class="btn btn-primary btn-lg") }}
                     {% endif %}
-                    <a class="btn btn-lg btn-warning btn-block" href="/userhome">
+                    <a class="btn btn-lg btn-warning btn-block" href="/projects">
                         Cancel
                     </a>
                 </p>

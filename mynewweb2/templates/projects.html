@@ -54,15 +54,15 @@
                         </td>
 
                         <td class="text-center">
-                            <form action="/editTask" method="post">
-                                <input type="hidden" name="hiddenTaskId" value="{{ project.task_id }}"/>
+                            <form action="/edit_project" method="post">
+                                <input type="hidden" name="hiddenProjectId" value="{{ project.project_id }}"/>
                                 <button type="submit" class="btn btn-danger">Edit</button>
                             </form>
                         </td>
 
                         <td class="text-center">
-                            <form action="/deleteTask" method="post">
-                                <input type="hidden" name="hiddenTaskId" value="{{ project.task_id }}"/>
+                            <form action="/delete_project" method="post">
+                                <input type="hidden" name="hiddenProjectId" value="{{ project.project_id }}"/>
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>

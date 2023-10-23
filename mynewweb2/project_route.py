@@ -44,8 +44,8 @@ def new_project():
 
             if _project_id == '0':
                 project = models.Project(
-                    name = _name,
-                    deadline = _deadline,
+                    name=_name,
+                    deadline=_deadline,
                     desc=_description, user=user, status=_status
                 )
                 db.session.add(project)
@@ -55,3 +55,63 @@ def new_project():
         else:
             return render_template('new-project.html', form=form, user=user)
     redirect('/')
+
+
+@app.route('/delete_project', methods=['GET', 'POST'])
+def delete_project():
+    _user_id = session.get('user_id')
+    if _user_id:
+        _project_id = request.form['hiddenProjectId']
+        if _project_id:
+            project = db.session.query(models.Project).filter_by(project_id=_project_id).first()
+            db.session.delete(project)
+            db.session.commit()
+
+        return redirect('/projects')
+
+    return redirect('/login')
+
+
+@app.route('/edit_project', methods=['GET', 'POST'])
+def edit_project():
+    form = ProjectForm()
+
+    form.status.choices = [
+        (s.status_id, s.desc) for s in db.session.query(models.Status).all()
+    ]
+
+    _user_id = session.get('user_id')
+    if _user_id:
+        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+        _project_id = request.form['hiddenProjectId']
+        if _project_id:
+            if form.submitUpdate.data:
+                print('Update project', form.data)
+                _name = form.name.data
+
+                _description = form.desc.data
+
+                _deadline = form.deadline.data
+
+                _status_id = form.status.data
+                _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
+
+                project = db.session.query(models.Task).filter_by(project_id=_project_id).first()
+                project.desc = _description
+                project.status = _status
+                db.session.commit()
+                return redirect('/projects')
+            else:
+                project = db.session.query(models.Task).filter_by(project_id=_project_id).first()
+                form.process()
+
+                form.name.data = project.name
+                form.desc.data = project.desc
+                form.deadline = project.deadline
+                form.status.data = project.status.status_id
+
+                return render_template('new-project.html', form=form, user=user, project=project)
+        elif form.validate_on_submit():
+            print('Form validated')
+
+    return redirect('/')

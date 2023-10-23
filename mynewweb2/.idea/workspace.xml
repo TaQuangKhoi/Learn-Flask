@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Tách project_route.py riêng">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/84afb14e-896d-42ce-845e-00337a687ea7/storage_v2/_src_/schema/main.uQUzAA.meta" afterDir="false" />
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Create project and show projects list">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_route.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/new-project.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new-project.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698042611865</updated>
-      <workItem from="1698042614887" duration="2959000" />
+      <workItem from="1698042614887" duration="3716000" />
     </task>
     <task id="LOCAL-00001" summary="Done create account and login with new DB">
       <option name="closed" value="true" />
@@ -138,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698044770990</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Create project and show projects list">
+      <option name="closed" value="true" />
+      <created>1698045734995</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698045734995</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +160,7 @@
     <MESSAGE value="Done create account and login with new DB" />
     <MESSAGE value="Create UI Projects" />
     <MESSAGE value="Tách project_route.py riêng" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tách project_route.py riêng" />
+    <MESSAGE value="Create project and show projects list" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create project and show projects list" />
   </component>
 </project>
