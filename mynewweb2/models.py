@@ -27,6 +27,7 @@ class Status(db.Model):
     status_id = db.Column(db.Integer, Sequence('status_id_seq'), primary_key=True)
     desc = db.Column(db.String(64), nullable=False)
 
+    projects = db.relationship('Project', back_populates='status')
     tasks = db.relationship('Task', back_populates='status')
 
     def __repr__(self):

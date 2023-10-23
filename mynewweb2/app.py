@@ -69,13 +69,18 @@ def signup_post():
     print(form.data)
     if form.validate_on_submit():
         print('Form validated')
-        _name = form.name.data
+        _first_name = form.first_name.data
+        _last_name = form.last_name.data
         _email = form.email.data
         _password = form.password.data
-        print(_name, _email, _password)
 
         if db.session.query(models.User).filter_by(email=_email).count() == 0:
-            new_user = models.User(full_name=_name, email=_email)
+            new_user = models.User(
+                first_name = _first_name,
+                last_name = _last_name,
+                email=_email,
+            )
+
             new_user.set_password(_password)
             db.session.add(new_user)
             db.session.commit()
@@ -202,7 +207,6 @@ def done_task():
         return redirect('/userhome')
 
     return redirect('/')
-
 
 
 with app.test_request_context():

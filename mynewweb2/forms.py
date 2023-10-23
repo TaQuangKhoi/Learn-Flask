@@ -4,9 +4,16 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 
 class SignupForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(
-        message='Please enter your name'
+    name = StringField('Name')
+
+    first_name = StringField('First Name', validators=[DataRequired(
+        message='Please enter your first name'
     )])
+
+    last_name = StringField('Last Name', validators=[DataRequired(
+        message='Please enter your last name'
+    )])
+
     email = StringField('Email', validators=[
         Email(
             message='Please enter a valid email'
