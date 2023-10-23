@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Save code">
+    <list default="true" id="9755bb2a-1bb6-4cf0-ad42-0f906856b2e2" name="Changes" comment="Done update task by project">
       <change beforePath="$PROJECT_DIR$/task_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/task_routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/project_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project_detail.html" afterDir="false" />
     </list>
@@ -171,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698053009482</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Done update task by project">
+      <option name="closed" value="true" />
+      <created>1698053513321</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698053513321</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,6 +206,7 @@
     <MESSAGE value="Tách code task route ra file riêng" />
     <MESSAGE value="Make Project Detail UI" />
     <MESSAGE value="Save code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Save code" />
+    <MESSAGE value="Done update task by project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done update task by project" />
   </component>
 </project>

@@ -196,6 +196,9 @@ def edit_task_by_project(projectId):
                 _status_id = form.status.data
                 _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
 
+                if _status.desc == 'Đang thực hiện':
+                    update_project_status(projectId, _status_id)
+
                 _deadline = form.deadline.data
 
                 task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
@@ -233,3 +236,9 @@ def done_task():
         return redirect('/userhome')
 
     return redirect('/')
+
+
+def update_project_status(project_id, status_id):
+    project = db.session.query(models.Project).filter_by(project_id=project_id).first()
+    project.status_id = status_id
+    db.session.commit()
