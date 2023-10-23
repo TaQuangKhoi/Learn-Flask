@@ -5,6 +5,7 @@ from app import app
 from forms import *
 from datetime import datetime, timedelta
 
+
 @app.route('/userhome', methods=['GET', 'POST'])
 def user_home():
     if not is_logged_in():
@@ -96,6 +97,7 @@ def new_task_by_project(projectId):
                 db.session.add(task)
 
             db.session.commit()
+            check_if_all_tasks_in_projects_completed(projectId)
             return redirect('/project_detail/' + projectId)
         else:
             return render_template('new-task.html', form=form, user=user, project=project)
@@ -208,6 +210,7 @@ def edit_task_by_project(projectId):
                 task.deadline = _deadline
 
                 db.session.commit()
+                check_if_all_tasks_in_projects_completed(projectId)
                 return redirect('/project_detail/' + projectId)
             else:
                 task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
@@ -216,6 +219,7 @@ def edit_task_by_project(projectId):
                 form.priority.data = task.priority.priority_id
                 form.status.data = task.status.status_id
                 form.deadline.data = task.deadline
+                check_if_all_tasks_in_projects_completed(projectId)
                 return render_template('new-task.html', form=form, user=user, task=task)
         elif form.validate_on_submit():
             print('Form validated')
@@ -242,3 +246,15 @@ def update_project_status(project_id, status_id):
     project = db.session.query(models.Project).filter_by(project_id=project_id).first()
     project.status_id = status_id
     db.session.commit()
+
+
+def check_if_all_tasks_in_projects_completed(project_id):
+    tasks = db.session.query(models.Task).filter_by(project_id=project_id).all()
+    count = 0
+    for task in tasks:
+        if task.status.desc == 'Hoàn thành':
+            count += 1
+    if count == len(tasks):
+        update_project_status(project_id, 4)
+    else:
+        update_project_status(project_id, 2)
