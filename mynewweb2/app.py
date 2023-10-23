@@ -1,5 +1,5 @@
-from flask import Flask, url_for, request, render_template, flash, session, redirect
-from forms import SignupForm, LoginForm, TaskForm, ProjectForm
+from flask import Flask, url_for, flash
+from forms import SignupForm, LoginForm, TaskForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import os
@@ -13,7 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 Migrate(app, db)
-import models
+from models import *
+
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -75,8 +76,8 @@ def signup_post():
 
         if db.session.query(models.User).filter_by(email=_email).count() == 0:
             new_user = models.User(
-                first_name = _first_name,
-                last_name = _last_name,
+                first_name=_first_name,
+                last_name=_last_name,
                 email=_email,
             )
 
@@ -208,22 +209,7 @@ def done_task():
     return redirect('/')
 
 
-@app.route('/projects', methods=['GET', 'POST'])
-def projects_list():
-    if not is_logged_in():
-        return redirect('/login')
-
-    _user_id = session.get('user_id')
-
-    if _user_id:
-        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        return render_template('userhome.html', user=user, is_logged_in=is_logged_in())
-    else:
-        return redirect('/login')
-
-
-import project_route
-
+from project_route import *
 
 with app.test_request_context():
     print(url_for('static', filename='style.css'))

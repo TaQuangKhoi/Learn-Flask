@@ -19,21 +19,32 @@
 {% block content %}
     <div class="m-5 p-5 mb-4 bg-body-secondary rounded-3">
         <p>
-            Welcome to the Projects Manager, {{ user.first_name + " " +  user.last_name }}!
+            Welcome to the Projects Management, {{ user.first_name + " " +  user.last_name }}!
         </p>
     </div>
-    {% if user.tasks %}
+    {% if user.projects %}
         <div class="container">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th>Task</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Deadline</th>
+                    <th>Number of Task</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for project in user.projects %}
-                    <tr class="{{ project.get_priority_class() }}">
-                        <td>{{ project.description }}</td>
+                    <tr class="">
+                        <td>{{ project.name }}</td>
+
+                        <td>{{ project.desc }}</td>
+
+                        <td>
+                            {{ project.deadline.strftime("%d/%m/%Y") }}
+                        </td>
+
+                        <td>{{ project.tasks|length }}</td>
 
                         <td class="text-center">
                             <form action="/doneTask" method="post">

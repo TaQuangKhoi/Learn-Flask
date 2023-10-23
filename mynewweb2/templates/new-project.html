@@ -33,14 +33,14 @@
                     <input type="hidden" name="hiddenProjectId" value="0">
                 {% endif %}
 
+                {{ form.name.label(class="sr-only form-label") }}
+                {{ form.name(class="form-control", placeholder="name") }}
+
                 {{ form.desc.label(class="sr-only form-label") }}
                 {{ form.desc(class="form-control", placeholder="Description") }}
 
                 {{ form.deadline.label(class="sr-only form-label") }}
                 {{ form.deadline(class="form-control", placeholder="Deadline") }}
-
-                {{ form.priority.label(class="sr-only form-label") }}
-                {{ form.priority(class="form-control", placeholder="Description") }}
 
                 {{ form.status.label(class="sr-only form-label") }}
                 {{ form.status(class="form-control", placeholder="Status") }}

@@ -79,7 +79,7 @@ class ProjectForm(FlaskForm):
             message='Please choose a deadline'
         ),
     ])
-    priority = SelectField('Priority', coerce = int)
+
     status = SelectField('Status', coerce = int)
 
     submitAdd = SubmitField('Add Project')
