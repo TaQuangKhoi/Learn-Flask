@@ -10,15 +10,12 @@ def projects_list():
     if not is_logged_in():
         return redirect('/login')
 
-    _user_id = session.get('user_id')
-
-    if _user_id:
-        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        form = SearchProjectForm()
-        return render_template('projects.html', user=user, projects=user.projects, form=form,
-                               is_logged_in=is_logged_in())
-    else:
+    if not (_user_id := session.get('user_id')):
         return redirect('/login')
+    user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+    form = SearchProjectForm()
+    return render_template('projects.html', user=user, projects=user.projects, form=form,
+                           is_logged_in=is_logged_in())
 
 
 @app.route('/new_project', methods=['GET', 'POST'])
@@ -32,39 +29,36 @@ def new_project():
     if is_logged_in():
         user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
 
-        if form.validate_on_submit():
-            _name = form.name.data
-
-            _description = form.desc.data
-
-            _deadline = form.deadline.data
-
-            _status_id = form.status.data
-            _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
-
-            _project_id = request.form['hiddenProjectId']
-
-            if _project_id == '0':
-                project = models.Project(
-                    name=_name,
-                    deadline=_deadline,
-                    desc=_description, user=user, status=_status
-                )
-                db.session.add(project)
-
-            db.session.commit()
-            return redirect('/projects')
-        else:
+        if not form.validate_on_submit():
             return render_template('new-project.html', form=form, user=user)
+        _name = form.name.data
+
+        _description = form.desc.data
+
+        _deadline = form.deadline.data
+
+        _status_id = form.status.data
+        _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
+
+        _project_id = request.form['hiddenProjectId']
+
+        if _project_id == '0':
+            project = models.Project(
+                name=_name,
+                deadline=_deadline,
+                desc=_description, user=user, status=_status
+            )
+            db.session.add(project)
+
+        db.session.commit()
+        return redirect('/projects')
     redirect('/')
 
 
 @app.route('/delete_project', methods=['GET', 'POST'])
 def delete_project():
-    _user_id = session.get('user_id')
-    if _user_id:
-        _project_id = request.form['hiddenProjectId']
-        if _project_id:
+    if _user_id := session.get('user_id'):
+        if _project_id := request.form['hiddenProjectId']:
             project = db.session.query(models.Project).filter_by(project_id=_project_id).first()
             db.session.delete(project)
             db.session.commit()
@@ -82,11 +76,10 @@ def edit_project():
         (s.status_id, s.desc) for s in db.session.query(models.Status).all()
     ]
 
-    _user_id = session.get('user_id')
-    if _user_id:
+    if _user_id := session.get('user_id'):
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
         _project_id = request.form['hiddenProjectId']
-        print("_project_id: " + _project_id)
+        print(f"_project_id: {_project_id}")
         if _project_id:
             if form.submitUpdate.data:
                 print('Update project', form.data)
@@ -157,7 +150,11 @@ def search_project():
 
     form.keyword.data = keyword
 
-    projects = db.session.query(models.Project).filter(models.Project.name.like('%' + keyword + '%')).all()
+    projects = (
+        db.session.query(models.Project)
+        .filter(models.Project.name.like(f'%{keyword}%'))
+        .all()
+    )
     for project in projects:
         print(project)
     print(keyword)
@@ -185,8 +182,12 @@ def search_tasks():
 
     form.keyword.data = keyword
     # filter in project with id is project_id
-    tasks = db.session.query(models.Task).filter(models.Task.project_id == project_id).filter(
-        models.Task.description.like('%' + keyword + '%')).all()
+    tasks = (
+        db.session.query(models.Task)
+        .filter(models.Task.project_id == project_id)
+        .filter(models.Task.description.like(f'%{keyword}%'))
+        .all()
+    )
     return render_template(
         'project_detail.html',
         user=user,

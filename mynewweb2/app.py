@@ -28,27 +28,22 @@ def login():
 
     form = LoginForm()
     error = None
-    if form.validate_on_submit():
-        # List of all data in request
-        _email = form.email.data
-        _password = form.password.data
-
-        # Check exist email
-        user = db.session.query(models.User).filter_by(email=_email).first()
-
-        if user is None:
-            flash(f'Email {_email} does not exist')
-        else:
-            # Check password
-            if user.check_password(_password):
-                session['user_id'] = user.user_id
-                return render_template('userhome.html', user=user)
-            else:
-                flash(f'Password is incorrect')
-
-        # return do_the_login(request)
-    else:
+    if not form.validate_on_submit():
         return render_template('login.html', form=form)
+    # List of all data in request
+    _email = form.email.data
+    _password = form.password.data
+
+    # Check exist email
+    user = db.session.query(models.User).filter_by(email=_email).first()
+
+    if user is None:
+        flash(f'Email {_email} does not exist')
+    elif user.check_password(_password):
+        session['user_id'] = user.user_id
+        return render_template('userhome.html', user=user)
+    else:
+        flash('Password is incorrect')
 
 
 @app.route('/logout')

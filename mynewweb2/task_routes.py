@@ -11,18 +11,15 @@ def user_home():
     if not is_logged_in():
         return redirect('/login')
 
-    _user_id = session.get('user_id')
-
-    if _user_id:
-        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        projects = db.session.query(models.Project).filter_by(user_id=_user_id).all()
-        # take all tasks of in projects
-        tasks = []
-        for project in projects:
-            tasks.extend(db.session.query(models.Task).filter_by(project_id=project.project_id).all())
-        return render_template('userhome.html', user=user, tasks=tasks, is_logged_in=is_logged_in())
-    else:
+    if not (_user_id := session.get('user_id')):
         return redirect('/login')
+    user = db.session.query(models.User).filter_by(user_id=_user_id).first()
+    projects = db.session.query(models.Project).filter_by(user_id=_user_id).all()
+    # take all tasks of in projects
+    tasks = []
+    for project in projects:
+        tasks.extend(db.session.query(models.Task).filter_by(project_id=project.project_id).all())
+    return render_template('userhome.html', user=user, tasks=tasks, is_logged_in=is_logged_in())
 
 
 @app.route('/newTask', methods=['GET', 'POST'])
@@ -35,23 +32,22 @@ def new_task():
     if is_logged_in():
         user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
 
-        if form.validate_on_submit():
-            _description = form.description.data
-
-            _priority_id = form.priority.data
-            _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
-
-            _task_id = request.form['hiddenTaskId']
-            print(_task_id)
-
-            if _task_id == '0':
-                task = models.Task(description=_description, user=user, priority=_priority)
-                db.session.add(task)
-
-            db.session.commit()
-            return redirect('/userhome')
-        else:
+        if not form.validate_on_submit():
             return render_template('new-task.html', form=form, user=user)
+        _description = form.description.data
+
+        _priority_id = form.priority.data
+        _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
+
+        _task_id = request.form['hiddenTaskId']
+        print(_task_id)
+
+        if _task_id == '0':
+            task = models.Task(description=_description, user=user, priority=_priority)
+            db.session.add(task)
+
+        db.session.commit()
+        return redirect('/userhome')
     redirect('/')
 
 
@@ -81,40 +77,37 @@ def new_task_by_project(projectId):
             else:
                 print('Deadline is valid')
 
-        if form.validate_on_submit():
-            _description = form.description.data
-
-            _priority_id = form.priority.data
-            _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
-
-            _status_id = form.status.data
-            _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
-
-            _task_id = request.form['hiddenTaskId']
-
-            _deadline = form.deadline.data
-
-            if _task_id == '0':
-                task = models.Task(
-                    description=_description, project=project, priority=_priority, status=_status,
-                    deadline=_deadline
-                )
-                db.session.add(task)
-
-            db.session.commit()
-            check_if_all_tasks_in_projects_completed(projectId)
-            return redirect('/project_detail/' + projectId)
-        else:
+        if not form.validate_on_submit():
             return render_template('new-task.html', form=form, user=user, project=project)
+        _description = form.description.data
+
+        _priority_id = form.priority.data
+        _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
+
+        _status_id = form.status.data
+        _status = db.session.query(models.Status).filter_by(status_id=_status_id).first()
+
+        _task_id = request.form['hiddenTaskId']
+
+        _deadline = form.deadline.data
+
+        if _task_id == '0':
+            task = models.Task(
+                description=_description, project=project, priority=_priority, status=_status,
+                deadline=_deadline
+            )
+            db.session.add(task)
+
+        db.session.commit()
+        check_if_all_tasks_in_projects_completed(projectId)
+        return redirect(f'/project_detail/{projectId}')
     redirect('/')
 
 
 @app.route('/deleteTask', methods=['GET', 'POST'])
 def delete_task():
-    _user_id = session.get('user_id')
-    if _user_id:
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
+    if _user_id := session.get('user_id'):
+        if _task_id := request.form['hiddenTaskId']:
             task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
             print("task: ", task)
             db.session.delete(task)
@@ -127,15 +120,13 @@ def delete_task():
 
 @app.route('/delete_task/<projectId>', methods=['GET', 'POST'])
 def delete_task_redirect_to_project(projectId):
-    _user_id = session.get('user_id')
-    if _user_id:
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
+    if _user_id := session.get('user_id'):
+        if _task_id := request.form['hiddenTaskId']:
             task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
             db.session.delete(task)
             db.session.commit()
 
-        return redirect('/project_detail/' + projectId)
+        return redirect(f'/project_detail/{projectId}')
 
     return redirect('/login')
 
@@ -147,11 +138,9 @@ def edit_task():
         (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
     ]
 
-    _user_id = session.get('user_id')
-    if _user_id:
+    if _user_id := session.get('user_id'):
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
+        if _task_id := request.form['hiddenTaskId']:
             if form.submitUpdate.data:
                 print('Update task', form.data)
                 _description = form.description.data
@@ -187,8 +176,7 @@ def edit_task_by_project(projectId):
         (s.status_id, s.desc) for s in db.session.query(models.Status).all()
     ]
 
-    _user_id = session.get('user_id')
-    if _user_id:
+    if _user_id := session.get('user_id'):
         user = db.session.query(models.User).filter_by(user_id=_user_id).first()
         _task_id = request.form['hiddenTaskId']
         project = db.session.query(models.Project).filter_by(project_id=projectId).first()
@@ -216,7 +204,7 @@ def edit_task_by_project(projectId):
 
                 db.session.commit()
                 check_if_all_tasks_in_projects_completed(projectId)
-                return redirect('/project_detail/' + projectId)
+                return redirect(f'/project_detail/{projectId}')
             else:
                 task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
                 form.process()
@@ -234,10 +222,8 @@ def edit_task_by_project(projectId):
 
 @app.route('/doneTask', methods=['GET', 'POST'])
 def done_task():
-    _user_id = session.get('user_id')
-    if _user_id:
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
+    if _user_id := session.get('user_id'):
+        if _task_id := request.form['hiddenTaskId']:
             task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
             task.isCompleted = True
             db.session.commit()
@@ -255,10 +241,7 @@ def update_project_status(project_id, status_id):
 
 def check_if_all_tasks_in_projects_completed(project_id):
     tasks = db.session.query(models.Task).filter_by(project_id=project_id).all()
-    count = 0
-    for task in tasks:
-        if task.status.desc == 'Hoàn thành':
-            count += 1
+    count = sum(1 for task in tasks if task.status.desc == 'Hoàn thành')
     if count == len(tasks):
         update_project_status(project_id, 4)
     else:
