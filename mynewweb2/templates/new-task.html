@@ -2,6 +2,9 @@
 
 {% block items %}
     <li class="nav-item">
+        <a class="nav-link" href="/new_project">New Project</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="/newTask">New Task</a>
     </li>
     <li class="nav-item">
@@ -16,7 +19,14 @@
             {% if task %}
                 <h1>Edit Task</h1>
             {% else %}
-                <h1>New Task</h1>
+                {% if project %}
+                    <h1>
+                        New Task for Project - {{ project.name }}
+                    </h1>
+                    <p><b>Project Deadline</b>: {{ project.deadline.strftime("%d/%m/%Y") }}</p>
+                {% else %}
+                    <h1>New Task</h1>
+                {% endif %}
             {% endif %}
 
             <form action="" method="post">
@@ -36,12 +46,31 @@
                 {{ form.priority.label(class="sr-only form-label") }}
                 {{ form.priority(class="form-control", placeholder="Description") }}
 
+                {{ form.status.label(class="sr-only form-label") }}
+                {{ form.status(class="form-control", placeholder="Status") }}
+
+                {{ form.deadline.label(class="sr-only form-label") }}
+                {{ form.deadline(class="form-control", placeholder="Deadline") }}
+                {% if form.deadline.errors %}
+                    <div class="mt-1">
+                        {% for error in form.deadline.errors %}
+                            <div class="alert alert-danger">
+                                <span>{{ error }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <p class="lead"></p>
                 <p>
                     {% if task %}
                         {{ form.submitUpdate(class="btn btn-primary btn-lg") }}
                     {% else %}
-                        {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                        {% if project %}
+                            {{ form.submitAddByProject(class="btn btn-primary btn-lg") }}
+                        {% else %}
+                            {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                        {% endif %}
                     {% endif %}
                     <a class="btn btn-lg btn-warning btn-block" href="/userhome">
                         Cancel

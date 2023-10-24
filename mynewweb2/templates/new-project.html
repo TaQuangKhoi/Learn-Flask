@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block items %}
+    <li class="nav-item">
+        <a class="nav-link" href="/new_project">New Project</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/newTask">New Task</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Log Out</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="container">
+
+            {% if project %}
+                <h1>Edit Project</h1>
+            {% else %}
+                <h1>New Project</h1>
+            {% endif %}
+
+            <form action="" method="post">
+                {{ form.csrf_token }}
+
+                {{ form.hidden_tag() }}
+
+                {% if project %}
+                    <input type="hidden" name="hiddenProjectId" value="{{ project.project_id }}">
+                {% else %}
+                    <input type="hidden" name="hiddenProjectId" value="0">
+                {% endif %}
+
+                {{ form.name.label(class="sr-only form-label") }}
+                {{ form.name(class="form-control", placeholder="name") }}
+
+                {{ form.desc.label(class="sr-only form-label") }}
+                {{ form.desc(class="form-control", placeholder="Description") }}
+
+                {{ form.deadline.label(class="sr-only form-label") }}
+                {{ form.deadline(class="form-control", placeholder="Deadline") }}
+
+                {{ form.status.label(class="sr-only form-label") }}
+                {{ form.status(class="form-control", placeholder="Status") }}
+
+                <p class="lead"></p>
+                <p>
+                    {% if project %}
+                        {{ form.submitUpdate(class="btn btn-primary btn-lg") }}
+                    {% else %}
+                        {{ form.submitAdd(class="btn btn-primary btn-lg") }}
+                    {% endif %}
+                    <a class="btn btn-lg btn-warning btn-block" href="/projects">
+                        Cancel
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+{% endblock %}

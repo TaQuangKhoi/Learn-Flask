@@ -1,4 +1,4 @@
-from flask import Flask, url_for, request, render_template, flash, session, redirect
+from flask import Flask, url_for, flash
 from forms import SignupForm, LoginForm, TaskForm
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 Migrate(app, db)
-import models
+from models import *
 
 
 @app.route('/')
@@ -69,13 +69,18 @@ def signup_post():
     print(form.data)
     if form.validate_on_submit():
         print('Form validated')
-        _name = form.name.data
+        _first_name = form.first_name.data
+        _last_name = form.last_name.data
         _email = form.email.data
         _password = form.password.data
-        print(_name, _email, _password)
 
         if db.session.query(models.User).filter_by(email=_email).count() == 0:
-            new_user = models.User(full_name=_name, email=_email)
+            new_user = models.User(
+                first_name=_first_name,
+                last_name=_last_name,
+                email=_email,
+            )
+
             new_user.set_password(_password)
             db.session.add(new_user)
             db.session.commit()
@@ -95,115 +100,9 @@ def is_logged_in():
     return session.get('user_id') is not None
 
 
-@app.route('/userhome', methods=['GET', 'POST'])
-def user_home():
-    if not is_logged_in():
-        return redirect('/login')
+from task_routes import *
 
-    _user_id = session.get('user_id')
-
-    if _user_id:
-        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        return render_template('userhome.html', user=user, is_logged_in=is_logged_in())
-    else:
-        return redirect('/login')
-
-
-@app.route('/newTask', methods=['GET', 'POST'])
-def new_task():
-    form = TaskForm()
-    form.priority.choices = [
-        (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
-    ]
-
-    if is_logged_in():
-        user = db.session.query(models.User).filter_by(user_id=session.get('user_id')).first()
-
-        if form.validate_on_submit():
-            _description = form.description.data
-
-            _priority_id = form.priority.data
-            _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
-
-            _task_id = request.form['hiddenTaskId']
-            print(_task_id)
-
-            if _task_id == '0':
-                task = models.Task(description=_description, user=user, priority=_priority)
-                db.session.add(task)
-
-            db.session.commit()
-            return redirect('/userhome')
-        else:
-            return render_template('new-task.html', form=form, user=user)
-    redirect('/')
-
-
-@app.route('/deleteTask', methods=['GET', 'POST'])
-def delete_task():
-    _user_id = session.get('user_id')
-    if _user_id:
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
-            task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
-            db.session.delete(task)
-            db.session.commit()
-
-        return redirect('/userhome')
-
-    return redirect('/login')
-
-
-@app.route('/editTask', methods=['GET', 'POST'])
-def edit_task():
-    form = TaskForm()
-    form.priority.choices = [
-        (p.priority_id, p.text) for p in db.session.query(models.Priority).all()
-    ]
-
-    _user_id = session.get('user_id')
-    if _user_id:
-        user = db.session.query(models.User).filter_by(user_id=_user_id).first()
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
-            if form.submitUpdate.data:
-                print('Update task', form.data)
-                _description = form.description.data
-                _priority_id = form.priority.data
-                _priority = db.session.query(models.Priority).filter_by(priority_id=_priority_id).first()
-
-                task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
-                task.description = _description
-                task.priority = _priority
-                db.session.commit()
-                return redirect('/userhome')
-            else:
-                task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
-                form.process()
-                form.description.data = task.description
-                form.priority.data = task.priority.priority_id
-                return render_template('new-task.html', form=form, user=user, task=task)
-        elif form.validate_on_submit():
-            print('Form validated')
-
-    return redirect('/')
-
-
-@app.route('/doneTask', methods=['GET', 'POST'])
-def done_task():
-    _user_id = session.get('user_id')
-    if _user_id:
-        _task_id = request.form['hiddenTaskId']
-        if _task_id:
-            task = db.session.query(models.Task).filter_by(task_id=_task_id).first()
-            task.isCompleted = True
-            db.session.commit()
-
-        return redirect('/userhome')
-
-    return redirect('/')
-
-
+from project_route import *
 
 with app.test_request_context():
     print(url_for('static', filename='style.css'))
